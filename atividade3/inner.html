@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Adicionar item à lista com cor</h2>
+
+<input type="text" id="myInput" placeholder="Digite o texto do item">
+<br><br>
+
+<input type="radio" id="red" name="cores" value="red">
+<label for="red">Vermelho</label><br>
+<input type="radio" id="green" name="cores" value="green">
+<label for="green">Verde</label><br>
+<input type="radio" id="blue" name="cores" value="blue">
+<label for="blue">Azul</label><br><br>
+
+<button id="addItemButton">Adicionar Item</button>
+
+<ul id="myList">
+  <li>Item 1</li>
+  <li>Item 2</li>
+</ul>
+
+<script>
+document.getElementById('addItemButton').addEventListener('click', function() {
+    // Get the value of the input field
+    const inputValue = document.getElementById('myInput').value;
+    
+    // Get the selected color
+    const selectedColor = document.querySelector('input[name="cores"]:checked').value;
+
+    // Create a new list item
+    const newLi = document.createElement('li');
+    newLi.textContent = inputValue;
+    newLi.style.color = selectedColor;
+
+    // Append the new list item to the list
+    document.getElementById('myList').appendChild(newLi);
+
+    // Clear the input field after adding the item
+    document.getElementById('myInput').value = '';
+});
+</script>
+
+</body>
+</html>

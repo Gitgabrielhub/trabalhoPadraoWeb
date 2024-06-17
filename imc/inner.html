@@ -1,0 +1,111 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/imc/scripts.js" defer></script>
+</head>
+<body>
+    <h1>Calcule o indice de massa corporal</h1>
+    <form action="">
+        <input type="text" placeholder="insira o seu peso" classe="peso"><br><br>
+        <input type="text" placeholder="insira o seu altura" class="altura"><br><br>
+        <input type="submit">
+    </form>
+    <div class="resultados">
+
+    </div>
+
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de IMC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        .normal {
+            color: green;
+        }
+        .alert {
+            color: orange;
+        }
+        .danger {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de IMC</h1>
+        <form id="imcForm">
+            <label for="weight">Peso (kg):</label>
+            <input type="number" id="weight" name="weight" required><br><br>
+            <label for="height">Altura (m):</label>
+            <input type="number" step="0.01" id="height" name="height" required><br><br>
+            <button type="submit">Calcular IMC</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        document.getElementById('imcForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const imc = weight / (height * height);
+            let resultText = `Seu IMC é ${imc.toFixed(2)}. `;
+            let className = '';
+
+            if (imc < 18.5) {
+                resultText += "Situação: Abaixo do peso";
+                className = 'alert';
+            } else if (imc >= 18.5 && imc < 24.9) {
+                resultText += "Situação: Peso normal";
+                className = 'normal';
+            } else if (imc >= 25 && imc < 29.9) {
+                resultText += "Situação: Sobrepeso";
+                className = 'alert';
+            } else if (imc >= 30 && imc < 34.9) {
+                resultText += "Situação: Obesidade grau I";
+                className = 'danger';
+            } else if (imc >= 35 && imc < 39.9) {
+                resultText += "Situação: Obesidade grau II";
+                className = 'danger';
+            } else {
+                resultText += "Situação: Obesidade grau III";
+                className = 'danger';
+            }
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = resultText;
+            resultDiv.className = 'result ' + className;
+        });
+    </script>
+</body>
+</html>
